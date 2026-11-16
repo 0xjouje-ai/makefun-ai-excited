@@ -1,4 +1,10 @@
+# Generated render output.
 out/
+# Default output directory used when no destination is supplied.
 output/
+# Local log files.
 *.log
+# Installed dependency tree.
 node_modules/
+# Local render previews.
+previews/

@@ -1,3 +1,6 @@
+// Draws a tiny astronaut watching a ringed planet above an aurora and moon.
+// The scene is rendered procedurally per pixel, then encoded as a PNG with a
+// small built-in encoder using node:zlib (plus Node's filesystem APIs).
 import fs from 'node:fs';
 import zlib from 'node:zlib';
 import path from 'node:path';
@@ -93,7 +96,7 @@ for (let y = Math.max(0, pcy - pr - 8); y <= pcy + pr + 8; y++) for (let x = pcx
 }
 // Tilted elliptical rings, drawn as luminous arcs around the planet.
 const ang = -0.22, ca = Math.cos(ang), sa = Math.sin(ang);
-for (let y = 0; y < 720; y++) for (let x = 360; x < 1024; x++) {
+for (let y = 0; y < 720; y++) for (let x = 360; x < W; x++) {
   const dx = x - pcx, dy = y - pcy, u = dx * ca + dy * sa, v = -dx * sa + dy * ca;
   const e = Math.abs(Math.hypot(u / 390, v / 105) - 1);
   if (e < .035 && (v > 18 || dx > 0)) { const glow = Math.exp(-e * 45); setPixel(x, y, 225 * glow, 155 * glow, 77 * glow); }
